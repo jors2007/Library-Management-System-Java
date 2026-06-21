@@ -123,7 +123,7 @@ public class LoginUI extends javax.swing.JFrame {
         int id=Integer.parseInt(UserIdTextField.getText() );
         Library LibObj = new Library ();
         
-        dbConnectivity db = new dbConnectivity();
+        IDBConnectivity db = DBFactory.getDB();
         boolean flag =false;
         if(StudentRadioButton.isSelected())
         {

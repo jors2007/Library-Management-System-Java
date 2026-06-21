@@ -47,7 +47,7 @@ public class Staff extends Users {
                     Current_Loan.SetaBorrower(current_borrower);
                     current_borrower.AddLoanInfo(Current_Loan);
                     LoanList.add(Current_Loan);
-                    dbConnectivity db = new dbConnectivity ();
+                    IDBConnectivity db = DBFactory.getDB();
                    return( db.AddNewLoan(Current_Loan) );
                 }
             }
@@ -108,7 +108,7 @@ public class Staff extends Users {
     @Override
     public String ViewInformation() {
         String Result="  ";
-        dbConnectivity db = new dbConnectivity();
+        IDBConnectivity db = DBFactory.getDB();
         ArrayList<Loan> LoanList = db.LoadLoanListofSpecificUser(this.GetId());
         for ( int i=0; i <LoanList.size(); i++) {
             Loan l=LoanList.get(i);
@@ -144,7 +144,7 @@ public class Staff extends Users {
      //1   NewBorrower.SetAddress(address);
         BorrowerList.add(NewBorrower);
 
-        dbConnectivity db = new dbConnectivity();
+        IDBConnectivity db = DBFactory.getDB();
         boolean result = db.AddBorrower(LastBorrowerId + 1, borrower_name, borrower_gender,  address ,telephone_number);
         return result;
 

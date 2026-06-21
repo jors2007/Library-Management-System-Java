@@ -29,21 +29,21 @@ abstract class Users {
 
     public ArrayList<Books> SearchBookbyTitle(String title) {
         ArrayList<Books> BooksList = new ArrayList<>();
-        dbConnectivity db = new dbConnectivity();
+        IDBConnectivity db = DBFactory.getDB();
         BooksList = db.SearchBookbyTitle(title);
         return BooksList;
     }
 
     public ArrayList<Books> SearchBookbySubject(String subject) {
         ArrayList<Books> BooksList = new ArrayList<>();
-        dbConnectivity db = new dbConnectivity();
+        IDBConnectivity db = DBFactory.getDB();
         BooksList = db.SearchBookbySubject(subject);
         return BooksList;
     }
 
     public ArrayList<Books> SearchBookbyAuthor(String author) {
         ArrayList<Books> BooksList = new ArrayList<>();
-        dbConnectivity db = new dbConnectivity();
+        IDBConnectivity db = DBFactory.getDB();
         BooksList = db.SearchBookbyAuthor(author);
         return BooksList;
     }

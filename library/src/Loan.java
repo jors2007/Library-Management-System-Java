@@ -56,7 +56,7 @@ public class Loan {
     }
 
     Loan(int id, int user_id, int borrowedbook_id, boolean returned_status, String fine_status, Date issue_date, Date due_date, Date return_date) {
-        dbConnectivity db = new dbConnectivity();
+        IDBConnectivity db = DBFactory.getDB();
         this.loanId = id;
         this.issue_date = issue_date;
         this.return_date = return_date;
@@ -119,7 +119,7 @@ public class Loan {
     public Books GetaBook() {
 
         //  return this.borrowed_book;
-        dbConnectivity db = new dbConnectivity();
+        IDBConnectivity db = DBFactory.getDB();
         return (db.GetLoanedBook(this.loanId));
     }
 
@@ -145,7 +145,7 @@ public class Loan {
     public void SetReturnedDate(Date Ret_date) {
 
         this.return_date = Ret_date;
-        dbConnectivity db = new dbConnectivity();
+        IDBConnectivity db = DBFactory.getDB();
         db.SetLoanReturnedDate(this.loanId, Ret_date);
 
     }
@@ -153,7 +153,7 @@ public class Loan {
     public void SetaBook(Books NewBook) {
 
         this.borrowed_book = NewBook;
-        dbConnectivity db = new dbConnectivity();
+        IDBConnectivity db = DBFactory.getDB();
         db.SetLoanedBook(this.loanId, this.borrowed_book.GetBookId());
 
     }
@@ -161,7 +161,7 @@ public class Loan {
     public void SetaBorrower(Users Loanee) {
 
         this.borrower = Loanee;
-        dbConnectivity db = new dbConnectivity();
+        IDBConnectivity db = DBFactory.getDB();
         db.SetLoaneeObject(this.loanId, this.borrower.GetId());
 
     }
@@ -169,7 +169,7 @@ public class Loan {
     public void SetReturnStatus(boolean status) {
 
         this.returned_status = status;
-        dbConnectivity db = new dbConnectivity();
+        IDBConnectivity db = DBFactory.getDB();
         db.SetReturnStatus(this.loanId, status);
     }
 
@@ -182,14 +182,14 @@ public class Loan {
         this.return_date = Update.return_date;
         this.returned_status = Update.returned_status;
 
-        dbConnectivity db = new dbConnectivity();
+        IDBConnectivity db = DBFactory.getDB();
         db.SetLoan(this.loanId, Update);
     }
 
     public void SetFineStatus(String status) {
 
         this.fine_status = status;
-        dbConnectivity db = new dbConnectivity();
+        IDBConnectivity db = DBFactory.getDB();
         db.SetLoanFineStatus(loanId, status);
     }
 

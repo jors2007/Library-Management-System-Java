@@ -25,12 +25,12 @@ import java.sql.ResultSet;
  *
  * @author Minahil
  */
-public class dbConnectivity {
+public class dbConnectivity implements IDBConnectivity {
 
     Connection con;
     Statement stmt;
 
-    dbConnectivity() //cons
+    public dbConnectivity() //cons
     {
         try {
             
@@ -44,7 +44,7 @@ public class dbConnectivity {
         }
     }
 
-    void closeConnection()
+    public void closeConnection()
     {
     
         try
@@ -60,7 +60,7 @@ public class dbConnectivity {
     
     
     
-    Books GetaBookbyId(int book_id) {
+    public Books GetaBookbyId(int book_id) {
 
         Books CurrentBook = new Books();
         try {
@@ -86,7 +86,7 @@ public class dbConnectivity {
 
     }
 
-    ArrayList<Books> LoadAllBooks() {
+    public ArrayList<Books> LoadAllBooks() {
         ArrayList<Books> CurrentBooks = new ArrayList<>();
         try {
             ResultSet rs = stmt.executeQuery("select * from Books");
@@ -110,7 +110,7 @@ public class dbConnectivity {
         return CurrentBooks;
     }
 
-    String GetAuthorofBook(int book_id) {
+    public String GetAuthorofBook(int book_id) {
         String author = " ";
         try {
             ResultSet rs = stmt.executeQuery("select author from Books where book_id='" + book_id + "'");
@@ -128,7 +128,7 @@ public class dbConnectivity {
 
     }
 
-    String GetTitleofBook(int book_id) {
+    public String GetTitleofBook(int book_id) {
         String title = "  ";
         try {
             ResultSet rs = stmt.executeQuery("select title from Books where book_id='" + book_id + "'");
@@ -147,7 +147,7 @@ public class dbConnectivity {
 
     }
 
-    String GetSubjectofBook(int book_id) {
+    public String GetSubjectofBook(int book_id) {
         String subject = "  ";
         try {
             ResultSet rs = stmt.executeQuery("select subject from Books where book_id='" + book_id + "'");
@@ -165,7 +165,7 @@ public class dbConnectivity {
 
     }
 
-    int GetQuantityofBook(int book_id) {
+    public int GetQuantityofBook(int book_id) {
         int quantity = -1;
         try {
             ResultSet rs = stmt.executeQuery("select quantity from Books where book_id='" + book_id + "'");
@@ -183,7 +183,7 @@ public class dbConnectivity {
 
     }
 
-    void UpdateBookQuantity(int new_quantity, int id) {
+    public void UpdateBookQuantity(int new_quantity, int id) {
         try {
             int i = stmt.executeUpdate("UPDATE Books  SET quantity='" + new_quantity + "'Where book_id='" + id + "'");
         } catch (Exception e) {
@@ -191,7 +191,7 @@ public class dbConnectivity {
         }
     }
 
-    void ChangeBookInfo(int book_id, String UpdatedInfo, int type) {
+    public void ChangeBookInfo(int book_id, String UpdatedInfo, int type) {
 
         try {
             if (type == 1) {
@@ -208,7 +208,7 @@ public class dbConnectivity {
     }
 
     //Functions Related to Borrower are implemented below
-    Borrower GetaBorrowerObjectByUserId(int id) {
+    public Borrower GetaBorrowerObjectByUserId(int id) {
 
         Borrower BorrowerObject = new Borrower();
         try {
@@ -241,7 +241,7 @@ public class dbConnectivity {
 
     }
 
-    ArrayList<Users> LoadAllBorrowers() {
+    public ArrayList<Users> LoadAllBorrowers() {
 
         ArrayList<Borrower> Borrowers = new ArrayList<>();
         ArrayList<Users> CurrentUsers = new ArrayList<>();
@@ -291,7 +291,7 @@ public class dbConnectivity {
 
     }
 
-    boolean SetFineStatus(int borrower_id, boolean fine_defaulter) {
+    public boolean SetFineStatus(int borrower_id, boolean fine_defaulter) {
 
         try {
             stmt.executeUpdate("Update Borrower Set fine_defaulter='" + fine_defaulter + "' Where borrower_id='" + borrower_id + "'");
@@ -304,7 +304,7 @@ public class dbConnectivity {
 
     }
 
-    boolean SetTelephone(int borrower_id, String telnum) {
+    public boolean SetTelephone(int borrower_id, String telnum) {
 
         try {
             stmt.executeUpdate("Update Borrower Set borrower_num='" + telnum + "' Where borrower_id='" + borrower_id + "'");
@@ -318,7 +318,7 @@ public class dbConnectivity {
     }
     
     
-     boolean SetAddress(int borrower_id, String Address) {
+    public boolean SetAddress(int borrower_id, String Address) {
 
         try {
             stmt.executeUpdate("Update Borrower Set borrower_address='" + Address + "' Where borrower_id='" + borrower_id + "'");
@@ -331,7 +331,7 @@ public class dbConnectivity {
 
     }
 
-    boolean SetName(int borrower_id, String name) {
+    public boolean SetName(int borrower_id, String name) {
 
         try {
             stmt.executeUpdate("Update Borrower Set borrower_name='" + name+ "' Where borrower_id='" + borrower_id + "'");
@@ -345,7 +345,7 @@ public class dbConnectivity {
     }
     
     
-    boolean SetGender(int borrower_id, char g) {
+    public boolean SetGender(int borrower_id, char g) {
 
         try {
             stmt.executeUpdate("Update Borrower Set borrower_gender='" + g+ "' Where borrower_id='" + borrower_id + "'");
@@ -358,7 +358,7 @@ public class dbConnectivity {
 
     }
 
-    boolean SetFineAmount(int borrower_id, double fine_amount) {
+    public boolean SetFineAmount(int borrower_id, double fine_amount) {
 
         try {
             stmt.executeUpdate("Update Borrower Set fine='" + fine_amount + "' Where borrower_id='" + borrower_id + "'");
@@ -370,7 +370,7 @@ public class dbConnectivity {
 
     }
 
-    boolean GetFineStatus(int borrower_id) {
+    public boolean GetFineStatus(int borrower_id) {
         boolean result = false;
         try {
             ResultSet rs = stmt.executeQuery("select fine_defaulter from Borrower where borrower_id='" + borrower_id + "'");
@@ -388,7 +388,7 @@ public class dbConnectivity {
         return result;
     }
 
-    double GetFineAmount(int borrower_id) {
+    public double GetFineAmount(int borrower_id) {
 
         double amount = 0.0;
         try {
@@ -409,7 +409,7 @@ public class dbConnectivity {
     }
 
     //Librarian Functions implemented here  
-    ArrayList<Librarian> LoadAllLibrarians() {
+    public ArrayList<Librarian> LoadAllLibrarians() {
 
         ArrayList<Librarian> CurrentLibrarians = new ArrayList<>();
         try {
@@ -437,7 +437,7 @@ public class dbConnectivity {
     }
 
     //Staff function
-    boolean AddBorrower(int user_id, String user_name, char user_gender, String add, String telnum) {
+    public boolean AddBorrower(int user_id, String user_name, char user_gender, String add, String telnum) {
 
         try {
 
@@ -454,7 +454,7 @@ public class dbConnectivity {
 
     }
 
-    ArrayList<Clerk> LoadAllClerk() {
+    public ArrayList<Clerk> LoadAllClerk() {
 
         ArrayList<Clerk> CurrentClerk = new ArrayList<>();
         try {
@@ -481,7 +481,7 @@ public class dbConnectivity {
 
     }
 
-    ArrayList<Loan> LoadLoanList() {
+    public ArrayList<Loan> LoadLoanList() {
 
         ArrayList<Loan> LoanList = new ArrayList<>();
         try {
@@ -533,7 +533,7 @@ public class dbConnectivity {
 
     }
 
-    ArrayList<Loan> LoadLoanListofSpecificUser(int user_id) {
+    public ArrayList<Loan> LoadLoanListofSpecificUser(int user_id) {
 
         ArrayList<Loan> LoanListofUser = new ArrayList<>();
         try {
@@ -603,7 +603,7 @@ public class dbConnectivity {
 //        }
     //Implementing LoanFunction here 
     
-    boolean AddNewLoan(Loan LoanObj) {
+    public boolean AddNewLoan(Loan LoanObj) {
 
         try {
             int loanid = LoanObj.GetLoanId();
@@ -628,7 +628,7 @@ public class dbConnectivity {
 
     }
 
-    int GetLoanedBookId(int loanId) {
+    public int GetLoanedBookId(int loanId) {
         int bookId = -1;
         try {
             ResultSet rs = stmt.executeQuery("select book_id from Loan where loanid='" + loanId + "'");
@@ -647,7 +647,7 @@ public class dbConnectivity {
 
     }
 
-    String GetLoanFineStatus(int loanId) {
+    public String GetLoanFineStatus(int loanId) {
         String LoanFineStatus = "";
         try {
             ResultSet rs = stmt.executeQuery("select fine_status from Loan where loanid='" + loanId + "'");
@@ -666,7 +666,7 @@ public class dbConnectivity {
 
     }
 
-    Date GetReturnDate(int loanId) {
+    public Date GetReturnDate(int loanId) {
 
         Date ReturnDate = new Date();
         try {
@@ -686,7 +686,7 @@ public class dbConnectivity {
 
     }
 
-    Date GetIssueDate(int loanId) {
+    public Date GetIssueDate(int loanId) {
 
         Date IssueDate = new Date();
         try {
@@ -706,7 +706,7 @@ public class dbConnectivity {
 
     }
 
-    Date GetDueDate(int loanId) {
+    public Date GetDueDate(int loanId) {
 
         Date DueDate = new Date();
         try {
@@ -726,7 +726,7 @@ public class dbConnectivity {
 
     }
 
-    Books GetLoanedBook(int loanId) {
+    public Books GetLoanedBook(int loanId) {
 
         Books LoanedBook = new Books();
         try {
@@ -747,7 +747,7 @@ public class dbConnectivity {
 
     }
 
-    int GetLoaneeId(int loanId) {
+    public int GetLoaneeId(int loanId) {
 
         int LoaneeId = -1;
         try {
@@ -767,7 +767,7 @@ public class dbConnectivity {
 
     }
 
-    boolean GetLoanReturnedStatus(int loanId) {
+    public boolean GetLoanReturnedStatus(int loanId) {
 
         boolean result = false;
         try {
@@ -787,7 +787,7 @@ public class dbConnectivity {
 
     }
 
-    void SetLoanReturnedDate(int loanId, Date Ret_date) {
+    public void SetLoanReturnedDate(int loanId, Date Ret_date) {
         int i = 0;
         try {
 
@@ -799,7 +799,7 @@ public class dbConnectivity {
 
     }
 
-    void SetLoanedBook(int loanId, int book_id) {
+    public void SetLoanedBook(int loanId, int book_id) {
         int i = 0;
         try {
 
@@ -810,7 +810,7 @@ public class dbConnectivity {
 
     }
 
-    void SetLoaneeObject(int loanId, int borrower) {
+    public void SetLoaneeObject(int loanId, int borrower) {
         int i = 0;
         try {
 
@@ -821,7 +821,7 @@ public class dbConnectivity {
 
     }
 
-    void SetReturnStatus(int loanId, boolean status) {
+    public void SetReturnStatus(int loanId, boolean status) {
         int i = 0;
         try {
 
@@ -832,7 +832,7 @@ public class dbConnectivity {
 
     }
 
-    void SetLoanFineStatus(int loanId, String status) {
+    public void SetLoanFineStatus(int loanId, String status) {
 
         int i = 0;
         try {
@@ -844,7 +844,7 @@ public class dbConnectivity {
 
     }
 
-    void SetLoan(int loanID, Loan LoanObj) {
+    public void SetLoan(int loanID, Loan LoanObj) {
 
         try {
             int loanid = LoanObj.GetLoanId();
@@ -867,7 +867,7 @@ public class dbConnectivity {
 
     }
 
-    void AddNewBook(int book_id, String title, String author, String subject, int quantity) {
+    public void AddNewBook(int book_id, String title, String author, String subject, int quantity) {
 
         try {
 
@@ -880,7 +880,7 @@ public class dbConnectivity {
 
     }
 
-    boolean DeleteABook(int book_id) {
+    public boolean DeleteABook(int book_id) {
 
         boolean flag=false;
         if(CheckIsBookLoaned(book_id)== false) {
@@ -898,7 +898,7 @@ public class dbConnectivity {
       return flag;
     }
 
-    ArrayList<Books> SearchBookbyTitle(String input) {
+    public ArrayList<Books> SearchBookbyTitle(String input) {
 
         ArrayList<Books> BooksList = new ArrayList<>();
 
@@ -921,7 +921,7 @@ public class dbConnectivity {
 
     }
 
-    ArrayList<Books> SearchBookbyAuthor(String input) {
+    public ArrayList<Books> SearchBookbyAuthor(String input) {
 
         ArrayList<Books> BooksList = new ArrayList<>();
 
@@ -944,7 +944,7 @@ public class dbConnectivity {
 
     }
 
-   ArrayList<Books> SearchBookbySubject(String input) {
+    public ArrayList<Books> SearchBookbySubject(String input) {
 
         ArrayList<Books> BooksList = new ArrayList<>();
 
@@ -970,7 +970,7 @@ public class dbConnectivity {
     
     
     
-    boolean CheckUserId (int ID)
+    public boolean CheckUserId (int ID)
     {
         boolean flag=false;
     
@@ -992,7 +992,7 @@ public class dbConnectivity {
     
     }
  
-    boolean CheckIsBookLoaned(int book_id)
+    public boolean CheckIsBookLoaned(int book_id)
     {
     
         boolean flag=false;

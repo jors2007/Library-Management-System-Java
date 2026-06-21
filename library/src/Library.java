@@ -23,7 +23,7 @@ public class Library {
     Library()
     {
     
-        dbConnectivity db= new dbConnectivity();
+        IDBConnectivity db= DBFactory.getDB();
         UsersList=db.LoadAllBorrowers();
       
         BooksList=db.LoadAllBooks();
@@ -647,7 +647,7 @@ public class Library {
     public static void main(String[] args) {
         // TODO code application logic here
 
-        dbConnectivity db = new dbConnectivity();
+        IDBConnectivity db = DBFactory.getDB();
         Loan L = new Loan(6);
  
 

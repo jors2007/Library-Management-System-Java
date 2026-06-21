@@ -28,7 +28,7 @@ public class Librarian extends Staff implements ManageBooks {
         book_id += 1;
         
         Books NewBook = new Books(book_id, NewTitle, NewAuthor, NewSubject, quantity);
-        dbConnectivity db = new dbConnectivity();
+        IDBConnectivity db = DBFactory.getDB();
         db.AddNewBook(book_id, NewTitle, NewAuthor, NewSubject, quantity);
         BooksList.add(NewBook);
 
@@ -38,7 +38,7 @@ public class Librarian extends Staff implements ManageBooks {
 
        boolean deleted=false;
         Books ToDelete=new Books();
-        dbConnectivity db = new dbConnectivity();
+        IDBConnectivity db = DBFactory.getDB();
         boolean result =db.DeleteABook(book_id);
         if(result == true) {
         for (Books B : BooksList) {

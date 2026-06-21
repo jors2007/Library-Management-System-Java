@@ -44,13 +44,13 @@ public class Borrower extends Users implements LoanableUser {
     @Override
     public boolean GetFineStatus() {
 //        return this.fine_defaulter;
-        dbConnectivity db = new dbConnectivity();
+        IDBConnectivity db = DBFactory.getDB();
         return (db.GetFineStatus(this.GetId()));
     }
 
     public double GetFineAmout() {
 //        return this.fine;
-        dbConnectivity db = new dbConnectivity();
+        IDBConnectivity db = DBFactory.getDB();
         return (db.GetFineAmount(this.GetId()));
 
     }
@@ -68,14 +68,14 @@ public class Borrower extends Users implements LoanableUser {
     @Override
     public boolean SetFineStatus(boolean fine_defaulter) {
         this.fine_defaulter = fine_defaulter;
-        dbConnectivity db = new dbConnectivity();
+        IDBConnectivity db = DBFactory.getDB();
         boolean result = db.SetFineStatus(this.GetId(), fine_defaulter);
         return result;
     }
 
     public boolean SetTelephone(String Telephone) {
         this.telephone = Telephone;
-        dbConnectivity db = new dbConnectivity();
+        IDBConnectivity db = DBFactory.getDB();
         boolean result = db.SetTelephone(this.GetId(), this.telephone);
         return result;
 
@@ -84,7 +84,7 @@ public class Borrower extends Users implements LoanableUser {
    
     public boolean SetAddress(String Address) {
         this.address = Address;
-       dbConnectivity db = new dbConnectivity();
+    IDBConnectivity db = DBFactory.getDB();
         boolean result = db.SetAddress(this.GetId(), this.address);
         return result;
 
@@ -93,7 +93,7 @@ public class Borrower extends Users implements LoanableUser {
     @Override
     public void SetFineAmount(double user_fine) {
         this.fine = user_fine;
-        dbConnectivity db = new dbConnectivity();
+        IDBConnectivity db = DBFactory.getDB();
         boolean result = db.SetFineAmount(this.GetId(), user_fine);
         
 
@@ -102,7 +102,7 @@ public class Borrower extends Users implements LoanableUser {
     public void SetName(String name)
     {
         super.SetName(name);
-        dbConnectivity db = new dbConnectivity();
+        IDBConnectivity db = DBFactory.getDB();
         boolean result = db.SetName(this.GetId(), name);
 
     }
@@ -111,7 +111,7 @@ public class Borrower extends Users implements LoanableUser {
     public void SetGender(char g)
     {
         super.SetGender(g);
-        dbConnectivity db = new dbConnectivity();
+        IDBConnectivity db = DBFactory.getDB();
         boolean result = db.SetGender(this.GetId(), g);
 
     }
@@ -130,7 +130,7 @@ public class Borrower extends Users implements LoanableUser {
     public void AllLoansofUser(ArrayList<Loan> LoansofUser) {
 
         // this.BookLoans=LoansofUser;
-        dbConnectivity db = new dbConnectivity();
+        IDBConnectivity db = DBFactory.getDB();
         this.BookLoans = db.LoadLoanListofSpecificUser(this.GetId());
     }
 
@@ -159,7 +159,7 @@ public class Borrower extends Users implements LoanableUser {
 
         // Ensure latest loans are loaded
         if (this.BookLoans == null || this.BookLoans.isEmpty()) {
-            dbConnectivity db = new dbConnectivity();
+            IDBConnectivity db = DBFactory.getDB();
             this.BookLoans = db.LoadLoanListofSpecificUser(this.GetId());
         }
 

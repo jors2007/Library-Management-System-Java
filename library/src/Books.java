@@ -48,19 +48,19 @@ public class Books {
 
     public void SetAuthor(String author) {
         this.author = author;
-        dbConnectivity db = new dbConnectivity();
+        IDBConnectivity db = DBFactory.getDB();
         db.ChangeBookInfo(book_id, author, 2);
     }
 
-    public void SetTitle(String title) {
+    public void SetTitle(String title) {a
         this.title = title;
-        dbConnectivity db = new dbConnectivity();
+        IDBConnectivity db = DBFactory.getDB();
         db.ChangeBookInfo(book_id, title, 1);
     }
 
     public void SetQuantity(int quantity) {
         this.quantity = quantity;
-        dbConnectivity db = new dbConnectivity();
+        IDBConnectivity db = DBFactory.getDB();
         db.UpdateBookQuantity(this.quantity, this.book_id);
 
     }
@@ -68,20 +68,20 @@ public class Books {
     public void SetSubject(String subject) {
 
         this.subject = subject;
-        dbConnectivity db = new dbConnectivity();
+        IDBConnectivity db = DBFactory.getDB();
         db.ChangeBookInfo(book_id, subject, 3);
 
     }
 
     public String GetTitle() {
 
-        dbConnectivity db = new dbConnectivity();
+        IDBConnectivity db = DBFactory.getDB();
         String titleofbook = db.GetTitleofBook(this.book_id);
         return titleofbook;
     }
 
     public String GetAuthor() {
-        dbConnectivity db = new dbConnectivity();
+        IDBConnectivity db = DBFactory.getDB();
         String authorofbook = db.GetAuthorofBook(this.book_id);
         return authorofbook;
     }
@@ -93,20 +93,20 @@ public class Books {
     }
 
     public String GetSubject() {
-        dbConnectivity db = new dbConnectivity();
+        IDBConnectivity db = DBFactory.getDB();
         String subjectofbook = db.GetSubjectofBook(this.book_id);
         return subjectofbook;
         //  return this.subject;
     }
 
     public Books GetaBook() {
-        dbConnectivity db = new dbConnectivity();
+        IDBConnectivity db = DBFactory.getDB();
         Books MyBook = db.GetaBookbyId(this.book_id);
         return MyBook;
     }
 
     public int GetQuantity() {
-        dbConnectivity db = new dbConnectivity();
+        IDBConnectivity db = DBFactory.getDB();
         int quantity_available = db.GetQuantityofBook(this.book_id);
         // return this.quantity;
         return quantity_available;
@@ -114,7 +114,7 @@ public class Books {
     }
 
     public boolean ChekcAvailability(int book_id) {
-        dbConnectivity db = new dbConnectivity();
+        IDBConnectivity db = DBFactory.getDB();
         int quantity_available = db.GetQuantityofBook(this.book_id);
         if (quantity_available <= 0) {
             return false;
@@ -127,7 +127,7 @@ public class Books {
     public void DecreaseQuantity() {
         if (quantity > 0) {
             this.quantity = this.quantity - 1;
-            dbConnectivity db = new dbConnectivity();
+            IDBConnectivity db = DBFactory.getDB();
             db.UpdateBookQuantity(this.quantity, book_id);
         }
 
@@ -135,7 +135,7 @@ public class Books {
 
     public void IncreaseQuantity() {
         this.quantity = this.quantity + 1;
-        dbConnectivity db = new dbConnectivity();
+        IDBConnectivity db = DBFactory.getDB();
         db.UpdateBookQuantity(this.quantity, book_id);
     }
 
