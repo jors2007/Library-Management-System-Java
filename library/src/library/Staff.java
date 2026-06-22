@@ -22,7 +22,7 @@ import java.util.ListIterator;
  */
 public class Staff extends Users {
 
-    Staff(int user_id, String user_name, char gender) {
+    public Staff(int user_id, String user_name, char gender) {
         super(user_id, user_name, gender);
 
     }

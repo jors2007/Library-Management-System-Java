@@ -1,5 +1,7 @@
 package library.Solution_OCP_2;
 
-public interface FinePaymentStrategy {
+import library.Users;
 
+public interface FinePaymentStrategy {
+    boolean processPayment(Users borrower, double amount);
 }

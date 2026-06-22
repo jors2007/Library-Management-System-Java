@@ -8,7 +8,7 @@ import java.io.*;
  * Loan/fine related behaviour has been moved to the LoanableUser interface
  * so that not every Users instance is required to support loans (LSP).
  */
-abstract class Users {
+public abstract class Users {
 
     private int user_id;
     private String user_name;
@@ -20,7 +20,7 @@ abstract class Users {
         this.gender = '-';
     }
 
-    Users(int user_id, String user_name, char gender) {
+    public Users(int user_id, String user_name, char gender) {
         this.user_id = user_id;
         this.user_name = user_name;
         this.gender = gender;
